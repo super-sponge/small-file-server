@@ -1,0 +1,208 @@
+  <configuration>
+    
+    <property>
+      <name>fs.defaultFS</name>
+      <value>hdfs://sdc1.sefon.com:8020</value>
+      <final>true</final>
+    </property>
+    
+    <property>
+      <name>fs.trash.interval</name>
+      <value>360</value>
+    </property>
+    
+    <property>
+      <name>ha.failover-controller.active-standby-elector.zk.op.retries</name>
+      <value>120</value>
+    </property>
+    
+    <property>
+      <name>ha.zookeeper.acl</name>
+      <value>sasl:nn:rwcda</value>
+    </property>
+    
+    <property>
+      <name>hadoop.custom-extensions.root</name>
+      <value>/hdp/ext/2.6/hadoop</value>
+    </property>
+    
+    <property>
+      <name>hadoop.http.authentication.simple.anonymous.allowed</name>
+      <value>true</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.ambari-server-hdp1.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.ambari-server-hdp1.hosts</name>
+      <value>sdc1.sefon.com</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hcat.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hcat.hosts</name>
+      <value>sdc1.sefon.com,sdc2.sefon.com</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hdfs.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hdfs.hosts</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hive.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.hive.hosts</name>
+      <value>sdc1.sefon.com,sdc2.sefon.com</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.HTTP.groups</name>
+      <value>users</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.HTTP.hosts</name>
+      <value>sdc1.sefon.com,sdc2.sefon.com</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.livy.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.livy.hosts</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.yarn.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.yarn.hosts</name>
+      <value>sdc2.sefon.com</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.zeppelin-hdp1.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.zeppelin-hdp1.hosts</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.zeppelin.groups</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.proxyuser.zeppelin.hosts</name>
+      <value>*</value>
+    </property>
+    
+    <property>
+      <name>hadoop.security.auth_to_local</name>
+      <value>RULE:[1:$1@$0](ambari-qa-hdp1@SEFON.COM)s/.*/ambari-qa/
+RULE:[1:$1@$0](hbase-hdp1@SEFON.COM)s/.*/hbase/
+RULE:[1:$1@$0](hdfs-hdp1@SEFON.COM)s/.*/hdfs/
+RULE:[1:$1@$0](spark-hdp1@SEFON.COM)s/.*/spark/
+RULE:[1:$1@$0](zeppelin-hdp1@SEFON.COM)s/.*/zeppelin/
+RULE:[1:$1@$0](.*@SEFON.COM)s/@.*//
+RULE:[2:$1@$0](activity_analyzer@SEFON.COM)s/.*/activity_analyzer/
+RULE:[2:$1@$0](activity_explorer@SEFON.COM)s/.*/activity_explorer/
+RULE:[2:$1@$0](amshbase@SEFON.COM)s/.*/ams/
+RULE:[2:$1@$0](amszk@SEFON.COM)s/.*/ams/
+RULE:[2:$1@$0](dn@SEFON.COM)s/.*/hdfs/
+RULE:[2:$1@$0](hbase@SEFON.COM)s/.*/hbase/
+RULE:[2:$1@$0](hive@SEFON.COM)s/.*/hive/
+RULE:[2:$1@$0](jhs@SEFON.COM)s/.*/mapred/
+RULE:[2:$1@$0](jn@SEFON.COM)s/.*/hdfs/
+RULE:[2:$1@$0](livy@SEFON.COM)s/.*/livy/
+RULE:[2:$1@$0](nfs@SEFON.COM)s/.*/hdfs/
+RULE:[2:$1@$0](nm@SEFON.COM)s/.*/yarn/
+RULE:[2:$1@$0](nn@SEFON.COM)s/.*/hdfs/
+RULE:[2:$1@$0](rangeradmin@SEFON.COM)s/.*/ranger/
+RULE:[2:$1@$0](rangertagsync@SEFON.COM)s/.*/rangertagsync/
+RULE:[2:$1@$0](rangerusersync@SEFON.COM)s/.*/rangerusersync/
+RULE:[2:$1@$0](rm@SEFON.COM)s/.*/yarn/
+RULE:[2:$1@$0](yarn@SEFON.COM)s/.*/yarn/
+DEFAULT</value>
+    </property>
+    
+    <property>
+      <name>hadoop.security.authentication</name>
+      <value>kerberos</value>
+    </property>
+    
+    <property>
+      <name>hadoop.security.authorization</name>
+      <value>true</value>
+    </property>
+    
+    <property>
+      <name>io.compression.codecs</name>
+      <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+    
+    <property>
+      <name>io.file.buffer.size</name>
+      <value>131072</value>
+    </property>
+    
+    <property>
+      <name>io.serializations</name>
+      <value>org.apache.hadoop.io.serializer.WritableSerialization</value>
+    </property>
+    
+    <property>
+      <name>ipc.client.connect.max.retries</name>
+      <value>50</value>
+    </property>
+    
+    <property>
+      <name>ipc.client.connection.maxidletime</name>
+      <value>30000</value>
+    </property>
+    
+    <property>
+      <name>ipc.client.idlethreshold</name>
+      <value>8000</value>
+    </property>
+    
+    <property>
+      <name>ipc.server.tcpnodelay</name>
+      <value>true</value>
+    </property>
+    
+    <property>
+      <name>mapreduce.jobtracker.webinterface.trusted</name>
+      <value>false</value>
+    </property>
+    
+    <property>
+      <name>net.topology.script.file.name</name>
+      <value>/etc/hadoop/conf/topology_script.py</value>
+    </property>
+    
+  </configuration>
