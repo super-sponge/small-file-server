@@ -25,6 +25,7 @@ public class HbaseFileUpload {
         Options opts = new Options();
         opts.addOption("h", false, "Help description");
         opts.addOption("d", true, "上传的文件夹,监控此文件夹并上传所有文件");
+        opts.addOption("t", true, "扫描文件夹间隔时间,默认1000ms");
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cl;
@@ -36,9 +37,17 @@ public class HbaseFileUpload {
                     hf.printHelp("May Options", opts);
                 } else {
                     String fullFilePath = cl.getOptionValue("d");
-                    List<String> files = HbaseUtils.getFiles(fullFilePath);
-                    FileOpHbase fileOpHbase = new FileOpHbase();
-                    fileOpHbase.writeDataFiles(files, fullFilePath);
+                    int delms = Integer.parseInt(cl.getOptionValue("t", "1000"));
+                    while (true) {
+                        List<String> files = HbaseUtils.getFiles(fullFilePath);
+                        FileOpHbase fileOpHbase = new FileOpHbase();
+                        fileOpHbase.writeDataFiles(files, fullFilePath);
+                        try {
+                            Thread.sleep(delms);
+                        } catch (InterruptedException e ) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             } else {
                 System.err.println("ERROR_NOARGS");
