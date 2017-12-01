@@ -16,7 +16,7 @@
 ####上传文件到hbase
     上传是rowkey 为../data此目录下的路径 + 此路径的hash值得前table.rowkey.header.size 位
     ./upload.sh  -d ../data
-####查询hbase中 /root/file-to-hbase-1.0/data 有多少文件
+####查询hbase中 ../data 有多少文件
     ./query.sh -f  lover
 ####导出hbase中的文件到本地
     ./query.sh -f   girl1.jpg -d girl1.jpg

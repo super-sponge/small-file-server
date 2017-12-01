@@ -45,6 +45,8 @@ public class FileOpHbase {
     //缓存已经插入的文件目录结构
     private static Set<String> cacheDir = ConcurrentHashMap.<String> newKeySet();
 
+    //存储输入的目录
+    private String inputPath = "";
 
     /**
      * 获取MessageEnty 信息插入到hbase
@@ -104,7 +106,7 @@ public class FileOpHbase {
             for (Put put : puts) {
                 List<Cell> cells = put.get(CF, CV);
                 Cell cell = cells.get(0);
-                LOG.error("Failed send message " + Bytes.toString(CellUtil.cloneValue(cell)));
+                LOG.error("Failed send message " + this.inputPath +  Bytes.toString(CellUtil.cloneValue(cell)));
             }
             StatUtils.statDataFailedToHBaseCnt(puts.size());
             puts.clear();
@@ -114,6 +116,19 @@ public class FileOpHbase {
 
         StatUtils.statDataSucceedToHBase(puts.size());
 
+        for (Put put : puts) {
+            List<Cell> cells = put.get(CF, CV);
+            Cell cell = cells.get(0);
+            String srcFile = this.inputPath + Bytes.toString(CellUtil.cloneValue(cell));
+            LOG.info("succed send message " + srcFile);
+            if (HbaseUtils.getFileProcessType() == "delete") {
+                FileUtils.deleteFile(srcFile);
+            } else if (HbaseUtils.getFileProcessType() == "move"){
+                HbaseUtils.moveFile(srcFile, HbaseUtils.getFileProcessBackDir());
+            } else {
+                LOG.warn("File " + srcFile + " not move or delete!!!");
+            }
+        }
         msgNumbers += puts.size();
         LOG.info("Commit message " + puts.size() + " Total message " + msgNumbers);
         LOG.debug("Clean buffers ");
@@ -205,11 +220,11 @@ public class FileOpHbase {
      * @throws IOException
      */
     public void writeDataFiles(List<String> lstFilesPath, String parentDir) throws IOException {
+        this.inputPath = parentDir.endsWith(File.separator) ? parentDir : parentDir + File.separator;
         List<MessageEntry> lstMessage = new ArrayList<MessageEntry>(lstFilesPath.size());
         for (String file : lstFilesPath) {
             byte[] value = HbaseUtils.readFile(file);
-            String path = parentDir.endsWith(File.separator) ? parentDir : parentDir + File.separator;
-            lstMessage.add(new MessageEntry(value, file.substring(path.length()), nowTime()));
+            lstMessage.add(new MessageEntry(value, file.substring(this.inputPath.length()), nowTime()));
         }
         writeData(lstMessage);
     }

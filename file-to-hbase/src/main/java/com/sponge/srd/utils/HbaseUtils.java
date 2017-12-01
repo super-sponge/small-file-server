@@ -29,6 +29,8 @@ public class HbaseUtils {
     private static Connection conn = null;
     private static PropertiesConfiguration props = Props.getProperties();
     private static int keyVAlueMaxSize = Integer.MAX_VALUE;
+    private static String fileProcessType = null;
+    private static String fileProcessBackDir = null;
 
     private static String HEXDIGITS = "0123456789ABCDEF";
     private static char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -284,4 +286,38 @@ public class HbaseUtils {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         return df.format(new Date());
     }
+
+
+    public static String getFileProcessType() {
+        if (fileProcessType == null) {
+            fileProcessType = props.getString(Constant.PRG_FILEPROCESS_TYPE, Constant.DEFAULT_PRG_FILEPROCESS_TYPE);
+            fileProcessType = fileProcessType.toLowerCase();
+        }
+            return fileProcessType;
+    }
+
+    public static String getFileProcessBackDir() {
+        if (fileProcessBackDir == null) {
+            fileProcessBackDir = props.getString(Constant.PRG_FILEPROCESS_FILEBACK_DIR,
+                    Constant.DEFAULT_PRG_FILEPROCESS_FILEBACK_DIR);
+            if (!fileProcessBackDir.endsWith(File.separator)) {
+                fileProcessBackDir = fileProcessBackDir + File.separator;
+            }
+
+        }
+        return fileProcessBackDir;
+    }
+
+    public static void moveFile(String srcFile, String distPath) {
+        //todo  windows 下面文件路径去要把文件头去掉
+        String distFile = null;
+        if ( FileUtils.windowsPath(srcFile)) {
+           distFile = srcFile.substring(3);
+        } else if (srcFile.startsWith(".")){
+            distFile = srcFile.substring(srcFile.indexOf(File.separator));
+        }
+        distFile = distPath + distFile;
+        FileUtils.Move(srcFile,distFile);
+    }
+
 }

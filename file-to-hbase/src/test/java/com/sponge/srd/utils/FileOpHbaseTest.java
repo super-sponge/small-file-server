@@ -8,13 +8,13 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class FileOpHbaseTest {
-    @Test
+    //@Test
     public void writeDataFiles() throws Exception {
         List<String> files = HbaseUtils.getFiles("data");
         FileOpHbase fileOpHbase = new FileOpHbase();
         fileOpHbase.writeDataFiles(files, "data");
     }
-    @Test
+    //@Test
     public void exportFile() throws Exception {
         String file = "lover\\lover2.jpg";
         FileOpHbase.exportFile(file, "target\\lover2.jpg");

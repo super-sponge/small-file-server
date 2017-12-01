@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class HbaseUtilsTest {
-    @Test
+    //@Test
     public void getFiles() throws Exception {
         String path = "src\\main";
         path = path.endsWith(File.separator) ? path : path + File.separator;
@@ -16,7 +16,11 @@ public class HbaseUtilsTest {
         for(String file : files) {
             System.out.println(file + ": " + file.substring(path.length()));
         }
+    }
 
+    //@Test
+    public void moveFiles() {
+        HbaseUtils.moveFile("e:\\1.txt", HbaseUtils.getFileProcessBackDir());
     }
 
 

@@ -44,6 +44,11 @@ public class Constant {
     //hdfs 配置
     public static final String KEEP_HDFS_FILE_PATH = "hdfs.path";
 
+    //程序配置参数
+    public static final String PRG_FILEPROCESS_TYPE = "prg.fileprocess.type";
+    public static final String DEFAULT_PRG_FILEPROCESS_TYPE = "None";
 
+    public static final String PRG_FILEPROCESS_FILEBACK_DIR = "prg.fileprocess.fileback.dir";
+    public static final String DEFAULT_PRG_FILEPROCESS_FILEBACK_DIR = "/tmp/";
 
 }
